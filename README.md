@@ -324,7 +324,7 @@ Ahora vamos a ejecutar su nuevo playbook, en su nodo web. Para hacer esto, vas a
 Desde el directorio de tu playbook `( ~/apache_basic )`, ejecuta el siguiente comando.
 
 ```bash
-ansible-playbook -i ../hosts install_apache.yml --private-key=~/.ssh/id_rsa
+ansible-playbook -i ../inventory install_apache.yml --private-key=~/.ssh/id_rsa
 ```
 
 Sin embargo, antes de ejecutar ese comando, tomemos unos minutos para comprender las opciones.
@@ -338,7 +338,7 @@ Sin embargo, antes de ejecutar ese comando, tomemos unos minutos para comprender
 - `--syntax-check` Si encuentra algún problema con su playbook esta opción podrá ayudarle a verificar que no se presente algún error de sintaxis con el archivo.
 
   ```bash
-  ansible-playbook -i ../hosts install_apache.yml --syntax-check --private-key=~/.ssh/id_rsa
+  ansible-playbook -i ../inventory install_apache.yml --syntax-check --private-key=~/.ssh/id_rsa
   ```
 
 Ahora, ejecute su libro de jugadas como se especifica en el **Paso 1**
@@ -595,7 +595,7 @@ cd ~/apache-basic-playbook
 Ejecute su playbook, utilizando el siguiente comando.
 
 ```bash
-ansible-playbook -i ../hosts site.yml --private-key=~/.ssh/id_rsa
+ansible-playbook -i ../inventory site.yml --private-key=~/.ssh/id_rsa
 ```
 
 ### Sección 2: Revisión
@@ -788,7 +788,7 @@ Ahora que ha separado con éxito su playbook original en un rol, ejecutémoslo y
 
 ```bash
 cd ~/apache-basic-playbook
-ansible-playbook -i ../hosts site.yml --private-key=~/.ssh/id_rsa
+ansible-playbook -i ../inventory site.yml --private-key=~/.ssh/id_rsa
 ```
 
 #### Paso 2: verifica tu salida
