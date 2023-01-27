@@ -324,7 +324,7 @@ Ahora vamos a ejecutar su nuevo playbook, en su nodo web. Para hacer esto, vas a
 Desde el directorio de tu playbook `( ~/apache_basic )`, ejecuta el siguiente comando.
 
 ```bash
-ansible-playbook -i ../inventory install_apache.yml --private-key=~/.ssh/id_rsa
+ansible-playbook -i ../inventory install_apache.yml --private-key=~/.ssh/id_rsa.pem
 ```
 
 Sin embargo, antes de ejecutar ese comando, tomemos unos minutos para comprender las opciones.
@@ -338,7 +338,7 @@ Sin embargo, antes de ejecutar ese comando, tomemos unos minutos para comprender
 - `--syntax-check` Si encuentra algún problema con su playbook esta opción podrá ayudarle a verificar que no se presente algún error de sintaxis con el archivo.
 
   ```bash
-  ansible-playbook -i ../inventory install_apache.yml --syntax-check --private-key=~/.ssh/id_rsa
+  ansible-playbook -i ../inventory install_apache.yml --syntax-check --private-key=~/.ssh/id_rsa.pem
   ```
 
 Ahora, ejecute su libro de jugadas como se especifica en el **Paso 1**
@@ -412,13 +412,16 @@ vim site.yml
 Agregue una definición de play y algunas variables a su playbook. Estos incluyen paquetes adicionales que su playbook  instalará en sus servidores web, además de algunas configuraciones específicas del servidor web.
 
 ```yaml
-  tasks:
-    - name: install httpd packages
-      package:
-        name: "{{ item }}"
-        state: present
-      with_items: "{{ httpd_packages }}"
-      notify: restart apache service
+---
+- hosts: web
+  name: This is a play within a playbook
+  become: yes
+  vars:
+    httpd_packages:
+      - httpd
+      - mod_wsgi
+    apache_test_message: This is a test message
+    apache_webserver_port: 80
 ```
 
 #### Paso 3: agrega una tarea
